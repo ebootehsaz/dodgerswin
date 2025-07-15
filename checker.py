@@ -4,12 +4,12 @@ import datetime
 import json
 
 # --- CONFIG ---
-DEBUG = 1  # Set to 1 for local debug/test, 0 for GitHub Actions
+DEBUG = 0  # Set to 1 for local debug/test, 0 for GitHub Actions
 WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 
 def main():
     today = datetime.date.today()
-    yesterday = today - datetime.timedelta(days=2)
+    yesterday = today - datetime.timedelta(days=1)
     date_str = yesterday.strftime("%Y-%m-%d")
 
     if DEBUG:
@@ -43,7 +43,7 @@ def main():
 
     coupon_active = False
     if is_home and home_score > away_score:
-        msg = f"⚾ **Dodgers won at home on {date_str}!** Coupon likely active today 🍜"
+        msg = f"⚾⚾⚾ **Dodgers won at home on {date_str}!** Coupon active today 🍜🍜🍜"
         coupon_active = True
     elif is_home and home_score <= away_score:
         msg = f"⚾ Dodgers **played at home on {date_str}** but lost. No coupon today."

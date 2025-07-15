@@ -2,7 +2,7 @@ name: Check Dodgers Coupon
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # 6 AM PT every day (13 UTC)
+    - cron: '0 16 * * *'  # 6 AM PT every day (13 UTC)
   workflow_dispatch:
 
 jobs:
