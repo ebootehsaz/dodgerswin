@@ -1,0 +1,19 @@
+name: Check Dodgers Coupon
+
+on:
+  schedule:
+    - cron: '0 13 * * *'  # 6 AM PT every day (13 UTC)
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run script
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install requests
+      - run: python check_coupon.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
