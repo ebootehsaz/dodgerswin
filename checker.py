@@ -4,7 +4,7 @@ import datetime
 import json
 
 # --- CONFIG ---
-DEBUG = 0  # Set to 1 for local debug/test, 0 for GitHub Actions
+DEBUG = 1  # Set to 1 for local debug/test, 0 for GitHub Actions
 WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL') if not DEBUG else None
 
 def main():
@@ -54,6 +54,7 @@ def main():
         print(f"[DEBUG] Sending message to Discord: {msg}")
         requests.post(WEBHOOK_URL, json={"content": msg})
     elif coupon_active and WEBHOOK_URL:
+        print(f"[DEBUG] Sending message to Discord: {msg}")
         requests.post(WEBHOOK_URL, json={"content": msg})
     else:
         print(f"No webhook url, no message sent. {msg}")
