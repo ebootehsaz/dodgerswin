@@ -5,7 +5,7 @@ import json
 
 # --- CONFIG ---
 DEBUG = 0  # Set to 1 for local debug/test, 0 for GitHub Actions
-WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL') if not DEBUG else None
+WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 
 def main():
     today = datetime.date.today()
