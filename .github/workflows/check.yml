@@ -15,6 +15,6 @@ jobs:
         with:
           python-version: '3.x'
       - run: pip install requests
-      - run: python check_coupon.py
+      - run: python checker.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
