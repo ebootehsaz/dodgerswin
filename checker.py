@@ -43,7 +43,7 @@ def main():
 
     coupon_active = False
     if is_home and home_score > away_score:
-        msg = f"⚾⚾⚾ **Dodgers won at home on {date_str}!** Coupon active today 🍜🍜🍜"
+        msg = f"⚾ @here **Dodgers won at home yesterday!** Coupon active today 🍜"
         coupon_active = True
     elif is_home and home_score <= away_score:
         msg = f"⚾ Dodgers **played at home on {date_str}** but lost. No coupon today."
@@ -56,6 +56,7 @@ def main():
     elif coupon_active and WEBHOOK_URL:
         print(f"[DEBUG] Sending message to Discord: {msg}")
         requests.post(WEBHOOK_URL, json={"content": msg})
+        requests.post(WEBHOOK_URL, json={"content": "dodgerswin"})
     else:
         print(f"No webhook url, no message sent. {msg}")
         
