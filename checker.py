@@ -33,6 +33,18 @@ def main():
     away_score = game['teams']['away']['score']
     is_home = home_id == 119
     dodgers_won = home_score > away_score if is_home else away_score > home_score
+    
+    # Get opponent team name
+    if is_home:
+        opponent_name = game['teams']['away']['team']['name']
+    else:
+        opponent_name = game['teams']['home']['team']['name']
+    
+    # Calculate margin of victory
+    if dodgers_won:
+        margin = abs(home_score - away_score)
+    else:
+        margin = 0
 
     if DEBUG:
         print(f"[DEBUG] API response: {json.dumps(data, indent=4)}")
@@ -40,10 +52,21 @@ def main():
         print(f"[DEBUG]  Dodgers were home: {is_home}")
         print(f"[DEBUG]  Final Score: Home {home_score} – Away {away_score}")
         print(f"[DEBUG]  Dodgers won: {dodgers_won}")
+        print(f"[DEBUG]  Opponent: {opponent_name}")
+        print(f"[DEBUG]  Margin of victory: {margin}")
 
     coupon_active = False
     if is_home and home_score > away_score:
-        msg = f"⚾ @here **Dodgers won at home yesterday!** Coupon active today 🍜"
+        # Create exciting messages based on margin of victory
+        if margin < 3:
+            # Sly comment for close wins
+            msg = f"⚾ @here **Dodgers barely squeaked by the {opponent_name}** {home_score}-{away_score} yesterday! 😅 Coupon active today 🍜"
+        elif margin < 5:
+            # Standard excitement for medium wins
+            msg = f"⚾ @here **Dodgers beat the {opponent_name}** {home_score}-{away_score} yesterday! Coupon active today 🍜"
+        else:
+            # Inappropriately excited for big wins
+            msg = f"⚾ @here **DODGERS ABSOLUTELY DEMOLISHED THE {opponent_name.upper()}** {home_score}-{away_score} YESTERDAY!!! 🔥🔥🔥 Coupon active today 🍜"
         coupon_active = True
     elif is_home and home_score <= away_score:
         msg = f"⚾ Dodgers **played at home on {date_str}** but lost. No coupon today."
