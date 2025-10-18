@@ -58,10 +58,10 @@ def main():
     coupon_active = False
     if is_home and home_score > away_score:
         # Create exciting messages based on margin of victory
-        if margin < 3:
+        if margin <= 1:
             # Sly comment for close wins
             msg = f"⚾ @here **Dodgers barely squeaked by the {opponent_name}** {home_score}-{away_score} yesterday! 😅 Coupon active today 🍜"
-        elif margin < 5:
+        elif margin <= 3:
             # Standard excitement for medium wins
             msg = f"⚾ @here **Dodgers beat the {opponent_name}** {home_score}-{away_score} yesterday! Coupon active today 🍜"
         else:
